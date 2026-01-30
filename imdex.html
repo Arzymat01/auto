@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Detailing Gallery</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 15px;
+            background: #000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        header p {
+            color: #bbb;
+            max-width: 800px;
+            margin: 10px auto 0;
+            font-size: 16px;
+        }
+
+        .content {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px 15px;
+            text-align: center;
+            color: #ccc;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .gallery img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* FULLSCREEN IMAGE */
+        .viewer {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 10px;
+        }
+
+        .viewer img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .close-text {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 18px;
+            color: #fff;
+            opacity: 0.7;
+        }
+
+        .close-text:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Auto Detailing</h1>
+    <p>
+        Профессиональный детейлинг автомобилей — чистота, защита и идеальный внешний вид вашего авто
+    </p>
+</header>
+
+<div class="content">
+    <p>
+        Детейлинг — это комплексный уход за автомобилем, включающий глубокую очистку,
+        полировку и защиту кузова и салона. Мы используем профессиональные средства и
+        современные технологии, чтобы вернуть автомобилю заводской блеск и сохранить
+        его надолго.
+    </p>
+</div>
+
+<div class="gallery">
+    <img src="images/1.jpg" onclick="openImage(this.src)">
+    <img src="images/2.jpg" onclick="openImage(this.src)">
+    <img src="images/3.jpg" onclick="openImage(this.src)">
+    <img src="images/4.jpg" onclick="openImage(this.src)">
+    <img src="images/5.jpg" onclick="openImage(this.src)">
+    <img src="images/6.jpg" onclick="openImage(this.src)">
+    <img src="images/7.jpg" onclick="openImage(this.src)">
+    <img src="images/8.jpg" onclick="openImage(this.src)">
+    <img src="images/9.jpg" onclick="openImage(this.src)">
+    <img src="images/10.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="viewer" id="viewer" onclick="closeImage()">
+    <span class="close-text">Нажмите, чтобы закрыть</span>
+    <img id="viewerImg">
+</div>
+
+<script>
+    function openImage(src) {
+        const viewer = document.getElementById("viewer");
+        const img = document.getElementById("viewerImg");
+        img.src = src;
+        viewer.style.display = "flex";
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeImage() {
+        document.getElementById("viewer").style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+</script>
+
+</body>
+</html>
