@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,7 +45,10 @@
             color: #ccc;
         }
 
+        /* ===== GALLERY ===== */
         .gallery {
+            max-width: 1100px;
+            margin: auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 10px;
@@ -64,11 +68,11 @@
             transform: scale(1.05);
         }
 
-        /* FULLSCREEN IMAGE */
+        /* ===== FULLSCREEN VIEWER ===== */
         .viewer {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0, 0, 0, 0.95);
             display: none;
             align-items: center;
             justify-content: center;
@@ -77,21 +81,35 @@
         }
 
         .viewer img {
-            width: auto;
-            height: auto;
-            max-width: 100%;
-            max-height: 100%;
+            width: 100%;
+            height: 100%;
+            max-width: 95vw;
+            max-height: 95vh;
             object-fit: contain;
             border-radius: 10px;
+            animation: zoomIn 0.25s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.85);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         .close-text {
             position: absolute;
             top: 15px;
             right: 20px;
-            font-size: 18px;
+            font-size: 16px;
             color: #fff;
             opacity: 0.7;
+            user-select: none;
         }
 
         .close-text:hover {
@@ -99,56 +117,59 @@
         }
     </style>
 </head>
+
 <body>
 
-<header>
-    <h1>Auto Detailing</h1>
-    <p>
-        Профессиональный детейлинг автомобилей — чистота, защита и идеальный внешний вид вашего авто
-    </p>
-</header>
+    <header>
+        <h1>Auto Detailing</h1>
+        <p>
+            Профессиональный детейлинг автомобилей — чистота, защита и идеальный внешний вид вашего авто
+        </p>
+    </header>
 
-<div class="content">
-    <p>
-        Детейлинг — это комплексный уход за автомобилем, включающий глубокую очистку,
-        полировку и защиту кузова и салона. Мы используем профессиональные средства и
-        современные технологии, чтобы вернуть автомобилю заводской блеск и сохранить
-        его надолго.
-    </p>
-</div>
+    <div class="content">
+        <p>
+            Детейлинг — это комплексный уход за автомобилем, включающий глубокую очистку,
+            полировку и защиту кузова и салона. Мы используем профессиональные средства и
+            современные технологии, чтобы вернуть автомобилю заводской блеск и сохранить
+            его надолго.
+        </p>
+    </div>
 
-<div class="gallery">
-    <img src="images/1.jpg" onclick="openImage(this.src)">
-    <img src="images/2.jpg" onclick="openImage(this.src)">
-    <img src="images/3.jpg" onclick="openImage(this.src)">
-    <img src="images/4.jpg" onclick="openImage(this.src)">
-    <img src="images/5.jpg" onclick="openImage(this.src)">
-    <img src="images/6.jpg" onclick="openImage(this.src)">
-    <img src="images/7.jpg" onclick="openImage(this.src)">
-    <img src="images/8.jpg" onclick="openImage(this.src)">
-    <img src="images/9.jpg" onclick="openImage(this.src)">
-    <img src="images/10.jpg" onclick="openImage(this.src)">
-</div>
+    <div class="gallery">
+        <img src="images/1.jpg" onclick="openImage(this.src)">
+        <img src="images/2.jpg" onclick="openImage(this.src)">
+        <img src="images/3.jpg" onclick="openImage(this.src)">
+        <img src="images/4.jpg" onclick="openImage(this.src)">
+        <img src="images/5.jpg" onclick="openImage(this.src)">
+        <img src="images/6.jpg" onclick="openImage(this.src)">
+        <img src="images/7.jpg" onclick="openImage(this.src)">
+        <img src="images/8.jpg" onclick="openImage(this.src)">
+        <img src="images/9.jpg" onclick="openImage(this.src)">
+        <img src="images/10.jpg" onclick="openImage(this.src)">
+    </div>
 
-<div class="viewer" id="viewer" onclick="closeImage()">
-    <span class="close-text">Нажмите, чтобы закрыть</span>
-    <img id="viewerImg">
-</div>
+    <div class="viewer" id="viewer" onclick="closeImage()">
+        <span class="close-text">Нажмите, чтобы закрыть</span>
+        <img id="viewerImg">
+    </div>
 
-<script>
-    function openImage(src) {
-        const viewer = document.getElementById("viewer");
-        const img = document.getElementById("viewerImg");
-        img.src = src;
-        viewer.style.display = "flex";
-        document.body.style.overflow = "hidden";
-    }
+    <script>
+        function openImage(src) {
+            const viewer = document.getElementById("viewer");
+            const img = document.getElementById("viewerImg");
 
-    function closeImage() {
-        document.getElementById("viewer").style.display = "none";
-        document.body.style.overflow = "auto";
-    }
-</script>
+            img.src = src;
+            viewer.style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeImage() {
+            document.getElementById("viewer").style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+    </script>
 
 </body>
+
 </html>
